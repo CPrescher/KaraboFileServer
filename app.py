@@ -25,4 +25,4 @@ def get_frame_from_karabo(run_index, frame_index):
 
     
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=7545)
+    app.run(host='0.0.0.0')
