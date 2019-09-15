@@ -12,13 +12,16 @@ instrument_key = 'data.image.pixels'
 
 @app.route('/run_<run_index>/frame_<frame_index>')
 def get_frame(run_index, frame_index):
-    run = RunDirectory(os.path.join(base_dir, 'r{:04d}'.format(int(run_index))))
-    tid, data = run.train_from_index(int(frame_index))
-    data = data[instrument_source][instrument_key]
+    data = get_frame_from_karabo(int(run_index), int(frame_index))
     bytestream = io.BytesIO()
     np.save(bytestream, data)
     return bytestream.getvalue()
 
+
+def get_frame_from_karabo(run_index, frame_index):
+    run = RunDirectory(os.path.join(base_dir, 'r{:04d}'.format(run_index)))
+    tid, data = run.train_from_index(frame_index)
+    return data[instrument_source][instrument_key]
 
     
 if __name__ == '__main__':
