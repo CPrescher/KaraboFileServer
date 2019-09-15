@@ -5,14 +5,32 @@ import time
 from pylab import *
 
 server_address = 'max-exfl001'
+port = 5000
 
 
-def get_data(run, frame):
-    r = requests.get('http://{}:7545/run_{}/frame_{}'.format(server_address, run, frame))
+def get_frame(run, frame):
+    r = requests.get('http://{}:{}/run_{}/frame_{}'.format(server_address, port, run, frame))
     return np.load(io.BytesIO(r.content))
 
+def get_run(run):
+    r = requests.get('http://{}:{}/run_{}'.format(server_address, port, run))
+    return np.load(io.BytesIO(r.content))
+
+
+print('#####################')
+print('Getting single Frames')
 t1 = time.time()
-for i in range(1, 20):
-    get_data(67, i)
+for i in range(1, 10):
+    get_frame(67, i)
     print('Time needed: {} s'.format(time.time()-t1))
     t1=time.time()
+
+
+print('##################')
+print('Getting whole runs')
+t1 = time.time()
+for i in range(1, 10):
+    get_run(67)
+    print('Time needed: {} s'.format(time.time()-t1))
+    t1=time.time()
+
