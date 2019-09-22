@@ -27,7 +27,7 @@ def get_frame(run_index, frame_index):
 def get_run(run_index):
     data = get_run_from_karabo(int(run_index))
     bytestream = io.BytesIO()
-    np.save(bytestream, data)
+    np.save(bytestream, np.array(data))
     return bytestream.getvalue()
 
 
