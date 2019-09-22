@@ -4,7 +4,7 @@ import io
 import time
 from pylab import *
 
-server_address = 'max-exfl001'
+server_address = 'ppv'
 port = 5000
 
 
@@ -20,8 +20,8 @@ def get_run(run):
 print('#####################')
 print('Getting single Frames')
 t1 = time.time()
-for i in range(1, 10):
-    get_frame(67, i)
+for i in range(20, 23):
+    get_frame(17, i)
     print('Time needed: {} s'.format(time.time()-t1))
     t1=time.time()
 
